@@ -1,10 +1,400 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tanya's Portfolio :)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>:P</title>
+  <!-- tut showed font awesome for icons + optional, used for arrows -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ccc, transparent);
+      margin: 2rem 0;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.3rem;
+    }
+    .subhead {
+      font-size: 1.3rem;
+      color: #666;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      margin: 2rem 0 1rem;
+      border-bottom: 3px solid #f2971f;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    .desc {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      color: #444;
+    }
+    /* pill tabs */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+    .skill-pill {
+      background: #f5a43b;
+      color: #ffffff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid #faad48;
+    }
+    .skill-pill:hover {
+      background: #faad48;
+      transform: scale(1.05);
+    }
+    /* my content carousels */
+    .carousel-container {
+      position: relative;
+      margin: 2rem 0;
+    }
+    .carousel {
+      display: flex;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .carousel-slide {
+      flex: 0 0 100%;
+      padding: 2rem;
+      background: white;
+      transition: transform 0.3s ease;
+    }
+    .carousel-slide h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #f2971f;
+    }
+    .carousel-slide p {
+      margin-bottom: 1.5rem;
+    }
+    .carousel-slide .btn {
+      display: inline-block;
+      background: #f2971f;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .carousel-slide .btn:hover {
+      background: #f06016;
+    }
+    .carousel-slide .placeholder-img {
+      width: 100%;
+      height: 200px;
+      background: #ddd;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-style: italic;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    .prev {
+      left: -20px;
+    }
+    .next {
+      right: -20px;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .dot.active {
+      background: #f2971f;
+    }
+    /* contact me pls section */
+    .contact {
+      background: #eef2f6;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .contact a {
+      color: #f2971f;
+      text-decoration: none;
+      font-weight: 500;
+      margin: 0 1rem;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    .contact i {
+      margin-right: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #777;
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .carousel-btn { width: 30px; height: 30px; }
+      .prev { left: -10px; }
+      .next { right: -10px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>i'm working on this atm</h1>
-    <p>best believe stuff will be here at some point in time!!!!</p>
+  <div class="container">
+    <!-- header -->
+    <h1>🍊</h1>
+    <p class="subhead">Professional T-Level Digital Software Development Student</p>
+
+    <hr>
+
+    <!-- about me wip -->
+    <section>
+      <h2 class="section-title">About Me</h2>
+      <p class="desc">placeholder placeholdedr just know that im proficient at stuff</p>
+    </section>
+
+    <hr>
+
+    <!-- tech?? ig? section -->
+    <section>
+      <h2 class="section-title">My Tech Projects</h2>
+      <p class="desc">placeholder overview (atm these are js my college projects)</p>
+      
+      <!-- pill skill where i put my langs and stuff -->
+      <div class="skills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">hopefully i will learn more :)</span>
+      </div>
+
+      <!-- carousel 1 (t) -->
+      <div class="carousel-container" id="techCarousel">
+        <div class="carousel" id="techCarouselInner">
+          <!-- a -->
+          <div class="carousel-slide">
+            <h3>Text-based Adventure Game</h3>
+            <p>placeholder brrr but brief 1 completed in python</p>
+            <a href="https://github.com/tan-gerine-tan/party-timer.git" class="btn" target="_blank">Check it out on GitHub!</a>
+          </div>
+          <!-- b -->
+          <div class="carousel-slide">
+            <h3>Pokedex</h3>
+            <p>placeholder brr but brief 3 part smt completed in python (tkinter)</p>
+            <a href="https://github.com/tan-gerine-tan/Well-Kept.git" class="btn" target="_blank">Check it out on Github!</a>
+          </div>
+          <!-- b this is gantt btw so no github link dont put -->
+          <div class="carousel-slide">
+            <h3>Gantt Chart</h3>
+            <a href="ESP_Logistics_Project_Plan.xlsx" class="btn" target="_blank">Download Gantt Chart</a>
+            <p style="margin-top:1rem; font-style:italic; color:#777;">(Placeholder – replace link with your actual file)</p>
+          </div>
+        </div>
+        <!-- controls for carousel -->
+        <button class="carousel-btn prev" onclick="moveSlide('tech', -1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next" onclick="moveSlide('tech', 1)"><i class="fas fa-chevron-right"></i></button>
+        <!-- little dots -->
+        <div class="carousel-dots" id="techDots"></div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- this is for art but might remove idk -->
+    <section>
+      <h2 class="section-title">Art (GCSE & WIP)</h2>
+      <p class="desc">placeholder text is gonna be everywhere sorry but this is js art; more of a passion than a practical thing</p>
+      
+      <!-- skill pills on art -->
+      <div class="skills">
+        <span class="skill-pill">Graphite/Pencil</span>
+        <span class="skill-pill">Charcoal</span>
+        <span class="skill-pill">Ink</span>
+        <span class="skill-pill">Digital</span>
+      </div>
+
+      <!-- art carousel but ALL placeholders cus i need to take photos of my work lel -->
+      <div class="carousel-container" id="artCarousel">
+        <div class="carousel" id="artCarouselInner">
+          <!-- x -->
+          <div class="carousel-slide">
+            <h3>final 1</h3>
+            <div class="placeholder-img">check back soon</div>
+            <p>final piece year 10</p>
+          </div>
+          <!-- y -->
+          <div class="carousel-slide">
+            <h3>final 2</h3>
+            <div class="placeholder-img">check back soon</div>
+            <p>final piece year 11</p>
+          </div>
+          <!-- z -->
+          <div class="carousel-slide">
+            <h3>digital 1</h3>
+            <div class="placeholder-img">check back soon</div>
+            <p>funsies work idk</p>
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveSlide('art', -1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next" onclick="moveSlide('art', 1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots" id="artDots"></div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- check me out gng -->
+    <section class="contact">
+      <h2 class="section-title" style="border-bottom: none; margin-top:0;">Contact me!</h2>
+      <p>
+        <a href="mailto:tanya.gift@bcestudent.com"><i class="fas fa-envelope"></i> email ahah</a>
+        <a href="https://github.com/tan-gerine-tan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; this was homework but is a genuine wip too</p>
+    </footer>
+  </div>
+
+  <script>
+    // logic since TWO carousels are needed and theyre not the same (admittedly taken from a tutorial)
+    const carousels = {
+      tech: {
+        inner: document.getElementById('techCarouselInner'),
+        slides: document.querySelectorAll('#techCarouselInner .carousel-slide'),
+        dotsContainer: document.getElementById('techDots'),
+        currentIndex: 0
+      },
+      art: {
+        inner: document.getElementById('artCarouselInner'),
+        slides: document.querySelectorAll('#artCarouselInner .carousel-slide'),
+        dotsContainer: document.getElementById('artDots'),
+        currentIndex: 0
+      }
+    };
+
+    // initialise carousels
+    function initCarousel(name) {
+      const car = carousels[name];
+      if (!car.slides.length) return;
+      // make the little tracker dts
+      car.dotsContainer.innerHTML = '';
+      for (let i = 0; i < car.slides.length; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.addEventListener('click', () => goToSlide(name, i));
+        car.dotsContainer.appendChild(dot);
+      }
+      updateDots(name);
+      // set the initial transform (is it optional yes but it ensures first slide visible)
+      car.inner.scrollLeft = 0; // using scroll for simplicity, but will use transform in moveSlide
+    }
+
+    function updateDots(name) {
+      const car = carousels[name];
+      const dots = car.dotsContainer.querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        if (idx === car.currentIndex) dot.classList.add('active');
+        else dot.classList.remove('active');
+      });
+    }
+
+    function goToSlide(name, index) {
+      const car = carousels[name];
+      if (index < 0) index = 0;
+      if (index >= car.slides.length) index = car.slides.length - 1;
+      car.currentIndex = index;
+      // scroll the carousel inner to the slide (using scrollLeft for simplicity)
+      const slideWidth = car.slides[0].offsetWidth;
+      car.inner.scrollTo({
+        left: index * slideWidth,
+        behavior: 'smooth'
+      });
+      updateDots(name);
+    }
+
+    function moveSlide(name, direction) {
+      const car = carousels[name];
+      goToSlide(name, car.currentIndex + direction);
+    }
+
+    // handle window resize to keep scroll position correct
+    window.addEventListener('resize', () => {
+      for (let name in carousels) {
+        const car = carousels[name];
+        if (car.slides.length) {
+          const slideWidth = car.slides[0].offsetWidth;
+          car.inner.scrollLeft = car.currentIndex * slideWidth;
+        }
+      }
+    });
+
+    // initialize both carousels when my page loads
+    window.addEventListener('load', () => {
+      initCarousel('tech');
+      initCarousel('art');
+    });
+  </script>
 </body>
 </html>
