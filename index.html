@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>:P</title>
-  <!-- tut showed font awesome for icons + optional, used for arrows -->
+  <!-- wanting icons so using font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -12,191 +12,374 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+      background-color: #fafafa;
+      color: #2d3e4f;
       line-height: 1.6;
       animation: fadeIn 1.5s ease;
+      position: relative;
+      min-height: 100vh;
     }
+
+    /* copying my cv circles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        /* topleft circle s */
+        radial-gradient(circle at 8% 12%, transparent 28%, rgba(180, 190, 200, 0.2) 28%, rgba(180, 190, 200, 0.2) 58%, transparent 62%),
+        /* bottomright circle s */
+        radial-gradient(circle at 92% 88%, transparent 28%, rgba(160, 170, 180, 0.2) 28%, rgba(160, 170, 180, 0.2) 58%, transparent 62%);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* polkaaaaaa dots 4px dots n 40px spacing*/
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20px 20px, #cbd5e0 4px, transparent 4px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 90%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 90%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 2rem;
+      position: relative;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2);
     }
+
     hr {
       border: 0;
       height: 1px;
-      background: linear-gradient(to right, transparent, #ccc, transparent);
+      background: linear-gradient(to right, transparent, #d0dadf, transparent);
       margin: 2rem 0;
     }
+
     h1 {
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 0.3rem;
+      text-shadow: 2px 2px 0 rgba(176, 217, 106, 0.3);
+      letter-spacing: -1px;
+      color: #1f2d3a;
     }
+
     .subhead {
-      font-size: 1.3rem;
-      color: #666;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #8bb74a 0%, #b0d96b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
     }
+
+    section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      border: 1px solid rgba(176, 217, 106, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px -8px rgba(176, 217, 106, 0.3);
+      border-color: rgba(176, 217, 106, 0.5);
+    }
+
+    /* bg icons for sections */
+    section::after {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 8rem;
+      color: rgba(170, 190, 200, 0.12);
+      z-index: 0;
+      pointer-events: none;
+      transform: rotate(0deg);
+      transition: color 0.3s;
+    }
+
+    /* giving each section its icon :PPPPP */
+    section:first-of-type::after {
+      content: "\f007"; /* user icon */
+    }
+    section:nth-of-type(2)::after {
+      content: "\f121"; /* code icon */
+    }
+    section:nth-of-type(3)::after {
+      content: "\f53f"; /* brush icon */
+    }
+    .contact::after {
+      content: "\f1d8"; /* plane icon */
+      font-size: 7rem;  /* slightly smaller for smaller contact */
+    }
+
+    /* so content stays ABOVE icons */
+    section > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .section-title {
       font-size: 2.2rem;
-      margin: 2rem 0 1rem;
-      border-bottom: 3px solid #f2971f;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 3px solid #b0d96b;
       display: inline-block;
       padding-bottom: 0.3rem;
+      color: #1f2d3a;
     }
+
     .desc {
       font-size: 1.1rem;
       margin: 1rem 0;
-      color: #444;
+      color: #4f6b7a;
     }
-    /* pill tabs */
+
+    /* skilll pills with glow */
     .skills {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
       margin: 1.5rem 0;
     }
+
     .skill-pill {
-      background: #f5a43b;
+      background: linear-gradient(145deg, #b0d96b, #8bb74a);
       color: #ffffff;
       padding: 0.5rem 1.2rem;
       border-radius: 50px;
       font-size: 0.95rem;
       font-weight: 500;
       transition: all 0.2s;
-      border: 1px solid #faad48;
+      border: 1px solid #d0f0a0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
+
     .skill-pill:hover {
-      background: #faad48;
-      transform: scale(1.05);
+      background: linear-gradient(145deg, #b8e07a, #9ac85a);
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 8px 20px rgba(176, 217, 106, 0.6), 0 0 15px #b0d96b;
+      border-color: #e5ffb0;
     }
-    /* my content carousels */
+
+    /* carousel containe */
     .carousel-container {
       position: relative;
       margin: 2rem 0;
     }
+
     .carousel {
       display: flex;
       overflow: hidden;
       scroll-behavior: smooth;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
     }
+
     .carousel-slide {
       flex: 0 0 100%;
       padding: 2rem;
-      background: white;
-      transition: transform 0.3s ease;
+      background: linear-gradient(145deg, #ffffff, #f4f7f9);
+      border-radius: 20px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.01), 0 8px 20px rgba(0,0,0,0.02);
+      color: #2d3e4f;
+      border: 1px solid #e2eef2;
     }
+
     .carousel-slide h3 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
-      color: #f2971f;
+      color: #8bb74a;
     }
+
     .carousel-slide p {
       margin-bottom: 1.5rem;
+      color: #4f6b7a;
     }
+
     .carousel-slide .btn {
       display: inline-block;
-      background: #f2971f;
+      background: #b0d96b;
       color: white;
       padding: 0.7rem 1.5rem;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 500;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid #d0f0a0;
     }
+
     .carousel-slide .btn:hover {
-      background: #f06016;
+      background: #9ac85a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(176, 217, 106, 0.5), 0 0 12px #b0d96b;
     }
+
     .carousel-slide .placeholder-img {
       width: 100%;
       height: 200px;
-      background: #ddd;
-      border-radius: 8px;
+      background: #f0f5f8;
+      border-radius: 12px;
       margin: 1rem 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #666;
+      color: #8ba0b0;
       font-style: italic;
+      border: 1px dashed #b0d96b;
     }
+
     .carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #8bb74a;
+      border: 1px solid #d0f0a0;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.2rem;
-      transition: background 0.2s;
+      font-size: 1.3rem;
+      transition: all 0.2s;
       z-index: 10;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
+
     .carousel-btn:hover {
-      background: rgba(0,0,0,0.8);
+      background: #b0d96b;
+      color: #ffffff;
+      border-color: #e5ffb0;
+      box-shadow: 0 0 20px #b0d96b, 0 4px 12px rgba(176, 217, 106, 0.5);
     }
+
     .prev {
       left: -20px;
     }
     .next {
       right: -20px;
     }
+
     .carousel-dots {
       display: flex;
       justify-content: center;
       gap: 0.8rem;
       margin: 1rem 0;
     }
+
     .dot {
       width: 12px;
       height: 12px;
-      background: #ccc;
+      background: #d0dadf;
       border-radius: 50%;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
+
     .dot.active {
-      background: #f2971f;
+      background: #b0d96b;
+      transform: scale(1.3);
+      box-shadow: 0 0 18px #b0d96b, 0 0 8px #8bb74a;
     }
-    /* contact me pls section */
+
+    /* glow in contact sectiom */
     .contact {
-      background: #eef2f6;
-      padding: 2rem;
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(176, 217, 106, 0.12), rgba(245, 250, 240, 0.5));
+      padding: 2.5rem;
+      border-radius: 40px;
       margin-top: 3rem;
       text-align: center;
+      border: 1px solid rgba(176, 217, 106, 0.3);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
     }
+
     .contact a {
-      color: #f2971f;
+      color: #2d3e4f;
       text-decoration: none;
       font-weight: 500;
       margin: 0 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      display: inline-block;
+      transition: all 0.2s;
+      border: 1px solid #b0d96b;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      position: relative;
+      z-index: 2;
     }
+
     .contact a:hover {
-      text-decoration: underline;
+      background: #b0d96b;
+      color: #ffffff;
+      border-color: #d0f0a0;
+      box-shadow: 0 8px 25px rgba(176, 217, 106, 0.7), 0 0 15px #b0d96b;
+      transform: translateY(-2px);
+      text-decoration: none;
     }
+
     .contact i {
       margin-right: 0.5rem;
+      color: #8bb74a;
     }
+    .contact a:hover i {
+      color: white;
+    }
+
     footer {
       text-align: center;
       margin-top: 2rem;
-      color: #777;
+      color: #8ba0b0;
+      font-size: 0.95rem;
     }
+
+    /* so that stuff responds */
     @media (max-width: 768px) {
-      h1 { font-size: 2.2rem; }
-      .carousel-btn { width: 30px; height: 30px; }
+      h1 { font-size: 2.8rem; }
+      .container { padding: 1.5rem; }
+      .carousel-btn { width: 36px; height: 36px; }
       .prev { left: -10px; }
       .next { right: -10px; }
+      section { padding: 1.5rem; }
+      section::after { font-size: 5rem; bottom: 5px; right: 10px; }
     }
   </style>
 </head>
@@ -208,74 +391,57 @@
 
     <hr>
 
-    <!-- about me wip -->
+    <!-- about me -->
     <section>
       <h2 class="section-title">About Me</h2>
-      <p class="desc">I am a T-Level DSD Student with a penchant for creativity and always approaching problems with
-
-alternative solutions.<br> Despite currently studying a software/tech-based course, I try to maintain
-
-my creative outlook on life by occasionally engaging in art-based projects, and incorporating some
-
-of my insights into my more technical projects.<br>
-
-Due to this, whilst a position purely in software development is appealing to me, I would be
-
-extremely open to working in roles regarding purely design for apps and websites.</p>
+      <p class="desc">I am a T-Level Digital Software Development Student with a penchant for creativity and always approaching problems with alternative solutions.<br><br> Despite currently studying a software/tech-based course, I try to maintain my creative outlook on life by occasionally engaging in art-based projects, and incorporating some of my insights into my more technical projects.<br><br> Due to this, whilst a position purely in software development is appealing to me, I would be extremely open to working in roles regarding purely design for apps and websites.</p>
     </section>
 
     <hr>
 
-    <!-- tech?? ig? section -->
+    <!-- tech section -->
     <section>
       <h2 class="section-title">My Tech Projects</h2>
-      <p class="desc">placeholder overview (atm these are js my college projects)</p>
+      <p class="desc">This section holds the current finished projects that I have worked on for my college course.</p>
       
-      <!-- pill skill where i put my langs and stuff -->
       <div class="skills">
         <span class="skill-pill">Python</span>
         <span class="skill-pill">Git</span>
         <span class="skill-pill">hopefully i will learn more :)</span>
       </div>
 
-      <!-- carousel 1 (t) -->
       <div class="carousel-container" id="techCarousel">
         <div class="carousel" id="techCarouselInner">
-          <!-- a -->
           <div class="carousel-slide">
             <h3>Text-based Adventure Game</h3>
-            <p>placeholder brrr but brief 1 completed in python</p>
+            <p>My first assigned project, where I created a Text-based Adventure Game using Python.</p>
             <a href="https://github.com/7anyas/party-timer.git" class="btn" target="_blank">Check it out on GitHub!</a>
           </div>
-          <!-- b -->
-          <div class="carousel-slide">
-            <h3>Pokedex</h3>
-            <p>placeholder brr but brief 3 part smt completed in python (tkinter)</p>
-            <a href="https://github.com/7anyas/Well-Kept.git" class="btn" target="_blank">Check it out on Github!</a>
-          </div>
-          <!-- b this is gantt btw so no github link dont put -->
           <div class="carousel-slide">
             <h3>Gantt Chart</h3>
+            <p>My third assigned project (Part 1), where I created a Gantt Chart based on a project plan scenario for a Logistics company.</p>
             <a href="ESP_Logistics_Project_Plan.xlsx" class="btn" target="_blank">Download Gantt Chart</a>
-            <p style="margin-top:1rem; font-style:italic; color:#777;">not downloadable atm</p>
+            <p style="margin-top:1rem; font-style:italic; color:#8ba0b0;">not downloadable atm</p>
+          </div>
+          <div class="carousel-slide">
+            <h3>Pokedex</h3>
+            <p>My third assigned project (Part 2), where I created a GUI for a Pokedex, using Python's TKinter.</p>
+            <a href="https://github.com/7anyas/Well-Kept.git" class="btn" target="_blank">Check it out on Github!</a>
           </div>
         </div>
-        <!-- controls for carousel -->
         <button class="carousel-btn prev" onclick="moveSlide('tech', -1)"><i class="fas fa-chevron-left"></i></button>
         <button class="carousel-btn next" onclick="moveSlide('tech', 1)"><i class="fas fa-chevron-right"></i></button>
-        <!-- little dots -->
         <div class="carousel-dots" id="techDots"></div>
       </div>
     </section>
 
     <hr>
 
-    <!-- this is for art but might remove idk -->
+    <!-- art section -->
     <section>
       <h2 class="section-title">Art (GCSE & WIP)</h2>
-      <p class="desc">placeholder text is gonna be everywhere sorry but this is js art; more of a passion than a practical thing</p>
+      <p class="desc">This section holds some of the art pieces I have worked on for both my Art GCSE, and my own leisure.</p>
       
-      <!-- skill pills on art -->
       <div class="skills">
         <span class="skill-pill">Graphite/Pencil</span>
         <span class="skill-pill">Charcoal</span>
@@ -283,26 +449,22 @@ extremely open to working in roles regarding purely design for apps and websites
         <span class="skill-pill">Digital</span>
       </div>
 
-      <!-- art carousel but ALL placeholders cus i need to take photos of my work lel -->
       <div class="carousel-container" id="artCarousel">
         <div class="carousel" id="artCarouselInner">
-          <!-- x -->
           <div class="carousel-slide">
-            <h3>final 1</h3>
+            <h3>Year 10 Final Piece</h3>
             <div class="placeholder-img">check back soon</div>
-            <p>final piece year 10</p>
+            <p>The final art piece I created for the first year of my Art GCSE.</p>
           </div>
-          <!-- y -->
           <div class="carousel-slide">
-            <h3>final 2</h3>
+            <h3>Year 11 (GCSE) Final Piece</h3>
             <div class="placeholder-img">check back soon</div>
-            <p>final piece year 11</p>
+            <p>The final art piece I created for the second (and last) year of my Art GCSE.</p>
           </div>
-          <!-- z -->
           <div class="carousel-slide">
-            <h3>digital 1</h3>
+            <h3>Digital Piece (mm/yyyy)</h3>
             <div class="placeholder-img">check back soon</div>
-            <p>funsies work idk</p>
+            <p>My own work idk</p>
           </div>
         </div>
         <button class="carousel-btn prev" onclick="moveSlide('art', -1)"><i class="fas fa-chevron-left"></i></button>
@@ -313,11 +475,11 @@ extremely open to working in roles regarding purely design for apps and websites
 
     <hr>
 
-    <!-- check me out gng -->
+    <!-- contact -->
     <section class="contact">
       <h2 class="section-title" style="border-bottom: none; margin-top:0;">Contact me!</h2>
       <p>
-        <a href="mailto:tan042@proton.me"><i class="fas fa-envelope"></i> email ahah</a>
+        <a href="mailto:tan042@proton.me"><i class="fas fa-envelope"></i> Email</a>
         <a href="https://github.com/7anyas" target="_blank"><i class="fab fa-github"></i> GitHub</a>
       </p>
     </section>
@@ -328,7 +490,7 @@ extremely open to working in roles regarding purely design for apps and websites
   </div>
 
   <script>
-    // logic since TWO carousels are needed and theyre not the same (admittedly taken from a tutorial)
+     // logic since TWO carousels are needed and theyre not the same (admittedly taken from a tutorial)
     const carousels = {
       tech: {
         inner: document.getElementById('techCarouselInner'),
