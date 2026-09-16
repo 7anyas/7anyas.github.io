@@ -235,37 +235,63 @@
 
         .card a:hover { text-decoration: underline; }
 
-        /* meant to be pt9 with art but is currently placeholder */
-        .art-placeholder-wide {
-            width: 100%;
-            background: #f0f0f0;
+        /* pt9 the art section (horizontal scroll) */
+        .art-scroll {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 15px 5px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .art-scroll::-webkit-scrollbar { height: 8px; }
+        .art-scroll::-webkit-scrollbar-track { background: transparent; }
+        .art-scroll::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px; }
+
+        .art-piece {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
             border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .art-piece:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .art-piece img {
+            display: block;
+            max-height: 300px;
+            width: auto;
+        }
+
+        /* the "more coming soon" card at the end */
+        .art-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: #888;
-            text-align: center;
-            padding: 60px 20px;
-            border: 2px dashed #ccc;
+            justify-content: center;
+            min-width: 200px;
+            min-height: 200px;
+            padding: 30px 20px;
         }
 
-        .art-placeholder-wide i {
-            font-size: 4rem;
-            margin-bottom: 20px;
+        .art-placeholder i {
+            font-size: 3rem;
             color: #bbb;
+            margin-bottom: 12px;
         }
 
-        .art-placeholder-wide h3 {
+        .art-placeholder h3 {
             font-family: var(--font-title);
             color: var(--title-color);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .art-placeholder-wide p {
-            font-size: 1rem;
-            color: #777;
+            font-size: 1.2rem;
         }
 
         /* pt10 with the contact (me) section */
@@ -421,7 +447,7 @@
             <h2>About Me</h2>
             <p class="about-text">
               I am a T-Level Digital Software Development student combining technical precision with creative problem-solving. I have a proven ability to translate complex requirements into functional code while maintaining a focus towards user-friendly designs.
-              I’m eager to leverage my skills in Python, Linux, and Technical Illustration to deliver innovative solutions in both software engineering and UI/UX design roles.  
+              I'm eager to leverage my skills in Python, Linux, and Technical Illustration to deliver innovative solutions in both software engineering and UI/UX design roles.  
             </p>
         </section>
 
@@ -467,13 +493,23 @@
             </div>
         </section>
 
-        <!-- art placeholder block -->
+        <!-- art section, horizontal scroll -->
         <section id="art">
             <h2>Art & Illustration</h2>
-            <div class="art-placeholder-wide">
-                <i class="fa-regular fa-paintbrush"></i>
-                <h3>Will Be Uploaded Soon</h3>
-                <p>A selection of my technical illustrations and artwork is currently being prepared. Check back soon to see my latest pieces.</p>
+            <div class="art-scroll">
+                <div class="art-piece">
+                    <img src="./images/artscan24.jpg" alt="Piece 1" loading="lazy">
+                </div>
+                <div class="art-piece">
+                    <img src="./images/artscan_final24.jpg" alt="Piece 2" loading="lazy">
+                </div>
+                <div class="art-piece">
+                    <img src="./images/artscan_final25.jpg" alt="Piece 3" loading="lazy">
+                </div>
+                <div class="art-piece art-placeholder">
+                    <i class="fa-regular fa-paintbrush"></i>
+                    <h3>More coming soon!</h3>
+                </div>
             </div>
         </section>
 
