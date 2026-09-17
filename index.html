@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tanya's Portfolio</title>
-    
-    <!-- wanted icons so getting them from FontAwesome! -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -235,27 +234,25 @@
 
         .card a:hover { text-decoration: underline; }
 
-        /* pt9 the art section (horizontal scroll) */
-        .art-scroll {
-            display: flex;
+        /* pt9 the art section (3-column grid) */
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            overflow-x: auto;
-            padding: 15px 5px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
         }
 
-        .art-scroll::-webkit-scrollbar { height: 8px; }
-        .art-scroll::-webkit-scrollbar-track { background: transparent; }
-        .art-scroll::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px; }
+        @media (max-width: 600px) {
+            .art-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
         .art-piece {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
         .art-piece:hover {
@@ -265,8 +262,9 @@
 
         .art-piece img {
             display: block;
-            max-height: 300px;
-            width: auto;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
         }
 
         .art-caption {
@@ -275,18 +273,18 @@
             text-align: center;
             padding: 10px 8px;
             background: white;
-        }   
+        }
 
-        /* the "more coming soon" card at the end */
+        /* the "more coming soon" card */
         .art-placeholder {
             background: #f0f0f0;
             border: 2px dashed #ccc;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-width: 200px;
-            min-height: 200px;
+            min-height: 220px;
             padding: 30px 20px;
         }
 
@@ -300,6 +298,30 @@
             font-family: var(--font-title);
             color: var(--title-color);
             font-size: 1.2rem;
+        }
+
+        /* lightbox (experimental rn) */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #lightbox.active {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         /* pt10 with the contact (me) section */
@@ -332,7 +354,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
             transition: transform 0.2s;
         }
-        
+
         .contact-item:hover {
             transform: translateX(5px);
         }
@@ -361,7 +383,7 @@
             color: var(--title-color);
             font-weight: 500;
         }
-        
+
         .contact-item a:hover {
             color: var(--accent-color);
         }
@@ -440,11 +462,11 @@
 <body>
 
     <div class="container">
-        
+
         <header>
             <h1>Tanya</h1>
             <p>T-Level Digital Software Development Student</p>
-            
+
             <div class="meta-badge">
                 <span><i class="fa-solid fa-location-dot"></i> London, England</span>
                 <span><i class="fa-regular fa-user"></i> 17 y.o.</span>
@@ -455,7 +477,7 @@
             <h2>About Me</h2>
             <p class="about-text">
               I am a T-Level Digital Software Development student combining technical precision with creative problem-solving. I have a proven ability to translate complex requirements into functional code while maintaining a focus towards user-friendly designs.
-              I'm eager to leverage my skills in Python, Linux, and Technical Illustration to deliver innovative solutions in both software engineering and UI/UX design roles.  
+              I'm eager to leverage my skills in Python, Linux, and Technical Illustration to deliver innovative solutions in both software engineering and UI/UX design roles.
             </p>
         </section>
 
@@ -501,35 +523,46 @@
             </div>
         </section>
 
-        <!-- art section, horizontal scroll -->
+        <!-- art section, 3-column grid -->
         <section id="art">
             <h2>Art & Illustration</h2>
-            <div class="art-scroll">
-                <div class="art-piece">
+            <div class="art-grid">
+                <div class="art-piece" data-full="./images/artscan24.jpg">
                     <img src="./images/artscan24.jpg" alt="Piece 1" loading="lazy">
-                    <p class="art-caption">Scan of my GCSE mock piece, 2024<br>Completed using oil pastels and fineliner. </p>
+                    <p class="art-caption">GCSE mock piece, 2024<br>Oil pastels and fineliner</p>
                 </div>
-                <div class="art-piece">
+                <div class="art-piece" data-full="./images/artscan_final24.jpg">
                     <img src="./images/artscan_final24.jpg" alt="Piece 2" loading="lazy">
-                    <p class="art-caption">Scan of my GCSE final piece, 2024<br>Completed using oil paint and fineliner.</p>
+                    <p class="art-caption">GCSE final piece, 2024<br>Oil paint and fineliner</p>
                 </div>
-                <div class="art-piece">
+                <div class="art-piece" data-full="./images/artscan_final25.jpg">
                     <img src="./images/artscan_final25.jpg" alt="Piece 3" loading="lazy">
-                    <p class="art-caption">Scan of my GCSE final piece, 2025<br>Completed using biro pens.</p>
+                    <p class="art-caption">GCSE final piece, 2025<br>Biro pens</p>
                 </div>
-                <div class="art-piece art-placeholder">
+                <div class="art-placeholder">
                     <i class="fa-regular fa-paintbrush"></i>
                     <h3>More coming soon!</h3>
                 </div>
             </div>
         </section>
 
+        <!-- ui/ux section, 3-column grid -->
+<section id="uiux">
+    <h2>UI / UX Design</h2>
+    <div class="art-grid">
+        <div class="art-placeholder">
+            <i class="fa-regular fa-paintbrush"></i>
+            <h3>More coming soon!</h3>
+        </div>
+    </div>
+</section>   
+
         <section id="contact">
             <h2>Contact Me</h2>
             <span class="section-subtitle">I will try and get in touch within 48 hours.</span>
-            
+
             <div class="contact-wrapper">
-                
+
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fa-solid fa-phone"></i>
@@ -569,10 +602,9 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="4" required></textarea>
                         </div>
-                      
-                      <!-- formspree -->
+
                         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-                      
+
                         <button type="submit">Send Message</button>
                     </form>
                 </div>
@@ -585,6 +617,25 @@
     <footer>
         <p>© 2026 Tanya/<a href="https://github.com/7anyas">7anyas</a></p>
     </footer>
+
+    <!-- lightbox overlay -->
+    <div id="lightbox" onclick="this.classList.remove('active')">
+        <img src="" alt="Enlarged view">
+    </div>
+
+    <script>
+    document.querySelectorAll('.art-piece[data-full]').forEach(piece => {
+        piece.addEventListener('click', () => {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.querySelector('img').src = piece.dataset.full;
+            lightbox.classList.add('active');
+        });
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+    });
+    </script>
 
 </body>
 </html>   
